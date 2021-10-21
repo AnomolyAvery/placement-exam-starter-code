@@ -1,23 +1,91 @@
-// HINT: You can delete this console.log after you no longer need it!
-console.log('JavaScript code has loaded!')
+let yourName = "Avery Herring"
 
-// First, tell us your name
-let yourName = "Jane Doe" // HINT: Replace this with your own name!
-
-// We'll use these variables to track the counts of each cookie type
 let gb = 0      // Ginger bread
 let cc = 0      // Chocolate Chip
 let sugar = 0   // Sugar Sprinkle
 
-// Code to update name display 
-document.getElementById('credit').textContent = `Created by ${yourName}`
+document.getElementById('credit').textContent = `Created by ${yourName}`;
 
-// Event listener for clicks on the "+" button for Ginger Bread cookies
-document.getElementById('add-gb').addEventListener('click', function() {
-    // HINT: You can delete this console.log after you no longer need it!
-    console.log('Ginger bread + button was clicked!')
 
-    // TODO: Write the code to be run when the "+" button for "Ginger Bread" is clicked
-})
 
-// TODO: Hook up event listeners for the rest of the buttons
+let buttonIds = [
+    {
+        name: 'minus-gb',
+        action: () => {
+            if (gb <= 0) {
+                alert("You don't have any Ginger Bread cookies on your order.");
+                return;
+            }
+            gb--;
+            updateCount('qty-gb', gb);
+        }
+    },
+    {
+        name: 'add-gb',
+        action: () => {
+            gb++;
+            updateCount('qty-gb', gb);
+        }
+    },
+    {
+        name: 'minus-cc',
+        action: () => {
+            if (cc <= 0) {
+                alert("You don't have any Chocolate Chip cookies on your order.");
+                return;
+            }
+            cc--;
+            updateCount('qty-cc', cc);
+        }
+    },
+    {
+        name: 'add-cc',
+        action: () => {
+            cc++;
+            updateCount('qty-cc', cc);
+        }
+    },
+    {
+        name: 'add-sugar',
+        action: () => {
+            sugar++;
+            updateCount('qty-sugar', sugar);
+        }
+    },
+    {
+        name: 'minus-sugar',
+        action: () => {
+            if (sugar <= 0) {
+                alert("You don't have any Sugar cookies on your order.");
+                return;
+            }
+            surgar--;
+            updateCount('qty-sugar', sugar);
+        }
+    }
+];
+
+const loadListeners = () => {
+    buttonIds.forEach(id => {
+        document.getElementById(id.name).addEventListener('click', () => {
+            id.action();
+            console.log(`${id.name} button clicked.`);
+        });
+    });
+};
+
+window.addEventListener('DOMContentLoaded', () => {
+    console.log('Initializing Button Click Event Listeners.');
+    loadListeners();
+});
+
+
+
+function updateCount(id, qty) {
+    let element = document.getElementById(id);
+    element.innerText = qty;
+
+    let totalElement = document.getElementById('qty-total');
+
+    totalElement.innerText = (sugar + cc + gb);
+}
