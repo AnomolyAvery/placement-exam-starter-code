@@ -59,7 +59,7 @@ let buttonIds = [
                 alert("You don't have any Sugar cookies on your order.");
                 return;
             }
-            surgar--;
+            sugar--;
             updateCount('qty-sugar', sugar);
         }
     }
